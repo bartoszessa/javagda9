@@ -1,11 +1,10 @@
 package zad1;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Map;
+import java.util.Scanner;
 
-public class FileOperator {
+public class FileOperator implements IFileOperator{
 
     private final String PATIENTS_FILE_NAME = "patients.txt";
     private final String VISITS_FILE_NAME = "visits.txt";
@@ -29,6 +28,36 @@ public class FileOperator {
         }
     }
 
+    public void saveVisitsToFile(Map<Integer,Visit> visitMap){
+        try {
+            FileWriter fileWriter = new FileWriter(VISITS_FILE_NAME,false);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+
+            for(Visit visit:visitMap.values()){
+
+                printWriter.println(toLine(visit));
+            }
+
+            fileWriter.close();
+            printWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String toLine(Visit visit) {
+
+        String result = "";
+        result += visit.getId() + SEPARATOR;
+        result += visit.getPatient().getId() + SEPARATOR;
+        result += visit.getDate() + SEPARATOR;
+        result += visit.getDoctorsName() + SEPARATOR;
+        result += visit.getPrice();
+        return result;
+    }
+
+
     private String toLine(Patient patient){
 
         String result = "";
@@ -40,23 +69,22 @@ public class FileOperator {
         result += patient.getNumberOfVisits();
         return result;
     }
-
-    public void saveVisitsToFile(Map<Integer,Visit> visitMap){
-        try {
-            FileWriter fileWriter = new FileWriter(VISITS_FILE_NAME);
-            PrintWriter printWriter = new PrintWriter(fileWriter);
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public Map<Integer,Visit> getAllVisits(){
         return null;
     }
 
-    public Map<Integer,Visit> getAllPatients(){
+    public Map<Integer,Patient> getAllPatients(){
+
+        File file=new File(PATIENTS_FILE_NAME);
+        Scanner sc= null;
+        try {
+            sc = new Scanner(file);
+            while(sc.hasNextLine()){
+                System.out.println(sc.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

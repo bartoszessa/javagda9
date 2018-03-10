@@ -1,7 +1,4 @@
-import zad1.Gender;
-import zad1.Patient;
-import zad1.RegistrationDesk;
-import zad1.Visit;
+import zad1.*;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -10,7 +7,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        LocalDate localDate = LocalDate.now();
         RegistrationDesk registrationDesk = new RegistrationDesk();
 
         Patient patient = new Patient();
@@ -36,6 +32,30 @@ public class Main {
             System.out.println(patientFromOptional);
         }
 
+        Visit visit = new Visit();
+        visit.setDate("2015-12-01");
+        visit.setId(1);
+        visit.setDoctorsName("drHouse");
+        visit.setPrice(100.0);
+        visit.setPatient(patient);
+
+        Visit visit2 = new Visit();
+        visit2.setDate("2016-12-01");
+        visit2.setId(2);
+        visit2.setDoctorsName("drHouse");
+        visit2.setPrice(100.0);
+        visit2.setPatient(patient);
+
+        Visit visit3 = new Visit();
+        visit3.setDate("2016-12-01");
+        visit3.setId(3);
+        visit3.setDoctorsName("drHouse");
+        visit3.setPrice(100.0);
+        visit3.setPatient(patient2);
+
+        registrationDesk.register(visit);
+        registrationDesk.register(visit2);
+        registrationDesk.register(visit3);
 
     }
 }
