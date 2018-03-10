@@ -8,9 +8,11 @@ public class RegistrationDesk {
 
     private Map<Integer,Visit> visits = new HashMap<>();
     private Map<Integer,Patient> patients = new HashMap<>();
+    private FileOperator fileOperator = new FileOperator();
 
     public int addPatient(Patient patient){
         patients.put(patient.getId(),patient);
+        fileOperator.savePatientsToFile(patients);
         return patient.getId();
     }
     public Optional<Patient> getPatient(int id){

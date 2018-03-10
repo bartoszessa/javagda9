@@ -25,7 +25,7 @@ public class Main {
         patient2.setGender(Gender.FEMALE);
         patient2.setId(2);
         patient2.setFirstName("Elisabeth");
-        patient2.setFirstName("Swan");
+        patient2.setLastName("Swan");
 
         registrationDesk.addPatient(patient);
         registrationDesk.addPatient(patient2);
@@ -35,5 +35,7 @@ public class Main {
             Patient patientFromOptional = patientOptional.get();
             System.out.println(patientFromOptional);
         }
+
+
     }
 }
