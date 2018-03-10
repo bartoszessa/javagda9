@@ -10,6 +10,10 @@ public class RegistrationDesk {
     private Map<Integer,Patient> patients = new HashMap<>();
     private IFileOperator fileOperator = new FileOperator();
 
+    public RegistrationDesk() {
+        loadFromFiles();
+    }
+
     public int addPatient(Patient patient){
         patient.setNumberOfVisits(0);
         patients.put(patient.getId(),patient);
@@ -36,7 +40,9 @@ public class RegistrationDesk {
         else return Optional.of(visit);
     }
 
-    public void loadFromFiles(){
+    private void loadFromFiles(){
 
+        visits = fileOperator.getAllVisits();
+        patients = fileOperator.getAllPatients();
     }
 }

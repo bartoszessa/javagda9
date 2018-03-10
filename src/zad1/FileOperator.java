@@ -72,7 +72,35 @@ public class FileOperator implements IFileOperator{
         return result;
     }
     public Map<Integer,Visit> getAllVisits(){
-        return null;
+
+
+        Map<Integer,Visit> visitMap = new HashMap<>();
+        File file=new File(VISITS_FILE_NAME);
+        Scanner sc= null;
+        try {
+            sc = new Scanner(file);
+            while(sc.hasNextLine()){
+                String line = sc.nextLine();
+                Visit visit = parseToVisit(line);
+                visitMap.put(visit.getId(),visit);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return visitMap;
+    }
+
+    private Visit parseToVisit(String line) {
+        String[] splits = line.split(SEPARATOR);
+        Visit visit = new Visit();
+        visit.setId(Integer.parseInt(splits[0]));
+        Patient patient = getAllPatients().get(Integer.parseInt(splits[1]));
+        visit.setPatient(patient);
+        visit.setDate(splits[2]);
+        visit.setDoctorsName(splits[3]);
+        visit.setPrice(Double.parseDouble(splits[4]));
+
+        return visit;
     }
 
     public Map<Integer,Patient> getAllPatients(){

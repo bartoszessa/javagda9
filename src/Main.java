@@ -59,6 +59,7 @@ public class Main {
 
         FileOperator fileOperator = new FileOperator();
         System.out.println(fileOperator.getAllPatients());
+        System.out.println(fileOperator.getAllVisits());
 
     }
 }
