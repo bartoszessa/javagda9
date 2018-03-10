@@ -1,0 +1,2 @@
+1;Johnny;Cash;1993-02-09;MALE;2
+2;Elisabeth;Swan;1967-02-08;FEMALE;1

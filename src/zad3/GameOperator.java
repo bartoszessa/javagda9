@@ -19,15 +19,21 @@ public class GameOperator implements Playable{
     }
 
     public void start(){
+        int numberOfGame=0;
+        while(numberOfGame!=-1){
+            pp.delim();
+            pp.print("Welcome!! Choose your game.");
+            pp.delim();
+            for(Playable playable: games){
+                pp.print(playable.getDescription()+ " "+playable.getNumber());
+            }
 
-        for(Playable playable: games){
-            pp.print(playable.getDescription()+ " "+playable.getNumber());
+            Scanner scanner = new Scanner(System.in);
+            numberOfGame = scanner.nextInt();
+            pp.spacer();
+            getGame(numberOfGame).start();
         }
 
-        Scanner scanner = new Scanner(System.in);
-        int numberOfGame = scanner.nextInt();
-        pp.spacer();
-        getGame(numberOfGame).start();
     }
 
     private Playable getGame(int numberOfGame) {
