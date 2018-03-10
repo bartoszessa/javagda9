@@ -26,7 +26,7 @@ public class GameOperator implements Playable{
 
         Scanner scanner = new Scanner(System.in);
         int numberOfGame = scanner.nextInt();
-        System.out.println("you chose: "+numberOfGame);
+        pp.spacer();
         getGame(numberOfGame).start();
     }
 
