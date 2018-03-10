@@ -1,13 +1,15 @@
 package zad1;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class FileOperator implements IFileOperator{
 
-    private final String PATIENTS_FILE_NAME = "patients.txt";
-    private final String VISITS_FILE_NAME = "visits.txt";
+    private final String FILEPATH = "src/zad1/db/";
+    private final String PATIENTS_FILE_NAME = FILEPATH+"patients.txt";
+    private final String VISITS_FILE_NAME = FILEPATH+"visits.txt";
     private final String SEPARATOR = ";";
 
     public void savePatientsToFile(Map<Integer,Patient> patientMap){
@@ -75,17 +77,32 @@ public class FileOperator implements IFileOperator{
 
     public Map<Integer,Patient> getAllPatients(){
 
+        Map<Integer,Patient> patientMap = new HashMap<>();
         File file=new File(PATIENTS_FILE_NAME);
         Scanner sc= null;
         try {
             sc = new Scanner(file);
             while(sc.hasNextLine()){
-                System.out.println(sc.nextLine());
+                String line = sc.nextLine();
+                Patient patient = parseToPatient(line);
+                patientMap.put(patient.getId(),patient);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return null;
+        return patientMap;
+    }
+
+    private Patient parseToPatient(String line) {
+        String[] splits = line.split(SEPARATOR);
+        Patient patient = new Patient();
+        patient.setId(Integer.parseInt(splits[0]));
+        patient.setFirstName(splits[1]);
+        patient.setLastName(splits[2]);
+        patient.setBirthDate(splits[3]);
+        patient.setGender(Gender.valueOf(splits[4]));
+        patient.setNumberOfVisits(Integer.parseInt(splits[5]));
+        return patient;
     }
 
 }
