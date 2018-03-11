@@ -1,5 +1,6 @@
 package zad3;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
