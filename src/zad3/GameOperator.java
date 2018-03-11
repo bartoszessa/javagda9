@@ -12,6 +12,7 @@ public class GameOperator implements Playable{
     ProperPrinter pp = new ProperPrinter(PRINTER_WIDTH);
 
 
+
     public GameOperator() {
         games.add(new GuessNumber());
         games.add(new HangMan());

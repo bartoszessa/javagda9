@@ -10,10 +10,11 @@ public class GuessNumber implements Playable{
     private Difficulty difficulty;
     private ProperPrinter pp = new ProperPrinter(GameOperator.PRINTER_WIDTH);
     private Scanner scanner = new Scanner(System.in);
+    private Cfg cfg;
 
     @Override
     public void start() {
-
+        cfg = new Cfg();
         pp.delim();
         setDifficultyAndStartingValues();
         startGame();
@@ -25,6 +26,7 @@ public class GuessNumber implements Playable{
         boolean won= false;
         int numberToGuess = random.nextInt(randomBound);
         while(!won&&livesLeft>=0){
+            pp.print("Lives left: "+livesLeft);
             pp.print("Give number: ");
 
             int number = scanner.nextInt();
@@ -38,7 +40,6 @@ public class GuessNumber implements Playable{
                 livesLeft--;
             }
             else won = true;
-            pp.print("Lives left: "+livesLeft);
         }
         if(won) pp.print("Good job!");
         else pp.print("Oops! You lost all your lives.");
@@ -50,16 +51,16 @@ public class GuessNumber implements Playable{
         difficulty = Difficulty.getFromValue(diff);
 
         if(difficulty==Difficulty.EASY){
-            livesLeft = 4;
-            randomBound = 10;
+            livesLeft = cfg.getGuessNumberEasyLives();
+            randomBound = cfg.getGuessNumberEasyRandom();
         }
         else if(difficulty==Difficulty.MEDIUM){
-            livesLeft = 5;
-            randomBound =20;
+            livesLeft = cfg.getGuessNumberMediumLives();
+            randomBound =cfg.getGuessNumberMediumRandom();
         }
         else{
-            livesLeft = 4;
-            randomBound = 100;
+            livesLeft = cfg.getGuessNumberHardLives();
+            randomBound = cfg.getGuessNumberHardRandom();
         }
     }
 
