@@ -13,6 +13,7 @@ public class WhoWantsToBeMillionaire implements Playable {
     private ProperPrinter pp;
     private List<Question> questions;
     private final String QUESTIONS_FILEPATH = "src/zad3/files/questions.txt";
+    private int currentLevel = 0;
 
 
     @Override
@@ -23,11 +24,10 @@ public class WhoWantsToBeMillionaire implements Playable {
         Scanner scanner = new Scanner(System.in);
         loadQuestions();
 
-        System.out.println(questions);
         Random random = new Random();
         while (true) {
 
-            Question question = questions.get(random.nextInt(questions.size()));
+            Question question = questions.get(currentLevel);
             pp.print(question.getContent());
             pp.spacer();
             for (int i = 0; i < question.getAnswers().size(); i++) {
@@ -38,6 +38,7 @@ public class WhoWantsToBeMillionaire implements Playable {
 
             if (question.getAnswers().get(answer).isCorrect()) {
                 pp.print("Nice! " + question.getAnswers().get(answer).getContent() + " is correct! ");
+                currentLevel++;
             } else {
                 pp.print("You lose!");
                 break;
@@ -68,6 +69,8 @@ public class WhoWantsToBeMillionaire implements Playable {
             ripped.add(levelledList.get(random.nextInt(levelledList.size())));
         }
         questions = ripped;
+        questions = questions.stream().sorted(compByLevel).collect(Collectors.toList());
+
     }
 
     @Override
@@ -100,6 +103,7 @@ public class WhoWantsToBeMillionaire implements Playable {
         }
 
         ripQuestions();
+
 
     }
 }
