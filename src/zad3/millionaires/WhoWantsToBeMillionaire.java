@@ -13,21 +13,21 @@ public class WhoWantsToBeMillionaire implements Playable {
     private ProperPrinter pp;
     private List<Question> questions;
     private final String QUESTIONS_FILEPATH = "src/zad3/files/questions.txt";
-    private int currentLevel = 0;
+    private int currentLevel = 1;
 
 
     @Override
     public void start() {
 
+        boolean won=false;
         Cfg cfg = new Cfg();
         pp = new ProperPrinter(cfg.getPrinterWidth());
         Scanner scanner = new Scanner(System.in);
         loadQuestions();
 
-        Random random = new Random();
-        while (true) {
+        while (!won) {
 
-            Question question = questions.get(currentLevel);
+            Question question = questions.get(currentLevel-1);
             pp.print(question.getContent());
             pp.spacer();
             for (int i = 0; i < question.getAnswers().size(); i++) {
@@ -38,12 +38,16 @@ public class WhoWantsToBeMillionaire implements Playable {
 
             if (question.getAnswers().get(answer).isCorrect()) {
                 pp.print("Nice! " + question.getAnswers().get(answer).getContent() + " is correct! ");
+                if(currentLevel==questions.size()) won=true;
                 currentLevel++;
             } else {
                 pp.print("You lose!");
+                pp.print("your max level was: "+currentLevel);
                 break;
             }
         }
+
+        if(won)pp.print("Congratulations! You finished all questions");
     }
 
     @Override
