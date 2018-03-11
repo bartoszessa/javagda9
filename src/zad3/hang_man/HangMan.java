@@ -1,6 +1,7 @@
-package zad3;
+package zad3.hang_man;
 
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
+import zad3.*;
 
 import java.util.*;
 import java.util.stream.Collectors;

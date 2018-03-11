@@ -1,5 +1,9 @@
 package zad3;
 
+import zad3.guess_number.GuessNumber;
+import zad3.hang_man.HangMan;
+import zad3.millionaires.WhoWantsToBeMillionaire;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -8,14 +12,16 @@ import java.util.Scanner;
 public class GameOperator implements Playable{
 
     List<Playable> games = new ArrayList<>();
-    public static final int PRINTER_WIDTH = 40;
-    ProperPrinter pp = new ProperPrinter(PRINTER_WIDTH);
-
-
+    public static int PRINTER_WIDTH;
+    ProperPrinter pp;
 
     public GameOperator() {
+        Cfg cfg = new Cfg();
+        PRINTER_WIDTH = cfg.getPrinterWidth();
+        pp = new ProperPrinter(cfg.getPrinterWidth());
         games.add(new GuessNumber());
         games.add(new HangMan());
+        games.add(new WhoWantsToBeMillionaire());
 
     }
 

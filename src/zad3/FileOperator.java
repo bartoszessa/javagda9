@@ -16,7 +16,8 @@ public class FileOperator {
         try {
             sc = new Scanner(file);
             while (sc.hasNextLine()) {
-                lines.add(sc.nextLine());
+                String line = sc.nextLine();
+                if(!line.isEmpty())lines.add(line);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

@@ -1,9 +1,11 @@
-package zad3;
+package zad3.guess_number;
+
+import zad3.*;
 
 import java.util.Random;
 import java.util.Scanner;
 
-public class GuessNumber implements Playable{
+public class GuessNumber implements Playable {
 
     private int livesLeft;
     private int randomBound;
@@ -14,6 +16,7 @@ public class GuessNumber implements Playable{
 
     @Override
     public void start() {
+
         cfg = new Cfg();
         pp.delim();
         setDifficultyAndStartingValues();

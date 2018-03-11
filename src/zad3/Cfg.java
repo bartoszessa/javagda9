@@ -1,5 +1,6 @@
 package zad3;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class Cfg {
@@ -16,13 +17,14 @@ public class Cfg {
     private int guessNumberHardRandom=100;
     private int printerWidth = 40;
 
-    public Cfg() {
+    public Cfg()  {
         loadValues();
     }
 
-    private void loadValues() {
+    private void loadValues()  {
 
-        List<String> lines = fileOperator.getLines(CFG_FILE_PATH);
+        List<String> lines = null;
+        lines = fileOperator.getLines(CFG_FILE_PATH);
 
         for (String line : lines) {
 
@@ -74,4 +76,14 @@ public class Cfg {
     public int getGuessNumberHardRandom() {
         return guessNumberHardRandom;
     }
+
+    /*
+    printer_width=42
+gn_easy_lives=777
+gn_medium_lives=4
+gn_hard_lives=3
+gn_easy_random=10
+gn_medium_random=50
+gn_hard_random=100
+     */
 }
